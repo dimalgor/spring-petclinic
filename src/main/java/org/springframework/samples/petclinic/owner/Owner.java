@@ -43,7 +43,7 @@ import org.springframework.samples.petclinic.model.Job;
  * @author Michael Isvy
  */
 @Entity
-@Table(name = "owners")
+@Table(name = "positions")
 public class Owner extends Job {
 
 	@Column(name = "address")

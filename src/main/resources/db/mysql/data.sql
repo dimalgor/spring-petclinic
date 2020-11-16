@@ -22,13 +22,13 @@ INSERT IGNORE INTO types VALUES (4, 'snake');
 INSERT IGNORE INTO types VALUES (5, 'bird');
 INSERT IGNORE INTO types VALUES (6, 'hamster');
 
-INSERT IGNORE INTO owners VALUES (1, 'Medicine', 'Spiral Computer Tomograph Engineer', 'Pomerky St.', 'Kharkiv', '6085551023');
-INSERT IGNORE INTO owners VALUES (2, 'Entrepreneurship', 'Private Entrepreneur', 'Aeroportnaya St.', 'Kharkiv', '6085551749');
-INSERT IGNORE INTO owners VALUES (3, 'Information Technology', 'Lua Developer', 'Otakara Yarosha St.', 'Kharkiv', '6085558763');
-INSERT IGNORE INTO owners VALUES (4, 'Information Technology', 'BlackBerry Developer', 'Krasnogo Lyotchika St.', 'Kharkiv', '6085553198');
-INSERT IGNORE INTO owners VALUES (5, 'Information Technology', 'Mobile Developer', 'Tabolskaya St.', 'Kharkiv', '6085552765');
-INSERT IGNORE INTO owners VALUES (6, 'Information Technology', 'Mobile Automation Engineer', '23 Avgusta St.', 'Kharkiv', '6085552654');
-INSERT IGNORE INTO owners VALUES (7, 'Information Technology', 'Java / R&D Engineer', '23 Avgusta St.', 'Kharkiv', '6085555387');
+INSERT IGNORE INTO positions VALUES (1, 'Medicine', 'Spiral Computer Tomograph Engineer', 'Pomerky St.', 'Kharkiv', '6085551023');
+INSERT IGNORE INTO positions VALUES (2, 'Entrepreneurship', 'Private Entrepreneur', 'Aeroportnaya St.', 'Kharkiv', '6085551749');
+INSERT IGNORE INTO positions VALUES (3, 'Information Technology', 'Lua Developer', 'Otakara Yarosha St.', 'Kharkiv', '6085558763');
+INSERT IGNORE INTO positions VALUES (4, 'Information Technology', 'BlackBerry Developer', 'Krasnogo Lyotchika St.', 'Kharkiv', '6085553198');
+INSERT IGNORE INTO positions VALUES (5, 'Information Technology', 'Mobile Developer', 'Tabolskaya St.', 'Kharkiv', '6085552765');
+INSERT IGNORE INTO positions VALUES (6, 'Information Technology', 'Mobile Automation Engineer', '23 Avgusta St.', 'Kharkiv', '6085552654');
+INSERT IGNORE INTO positions VALUES (7, 'Information Technology', 'Java / R&D Engineer', '23 Avgusta St.', 'Kharkiv', '6085555387');
 
 INSERT IGNORE INTO pets VALUES (1, 'Leo', '2000-09-07', 1, 1);
 INSERT IGNORE INTO pets VALUES (2, 'Basil', '2002-08-06', 6, 2);

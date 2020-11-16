@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS types (
   INDEX(name)
 ) engine=InnoDB;
 
-CREATE TABLE IF NOT EXISTS owners (
+CREATE TABLE IF NOT EXISTS positions (
   id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   area VARCHAR(50),
   position VARCHAR(100),
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS pets (
   type_id INT(4) UNSIGNED NOT NULL,
   owner_id INT(4) UNSIGNED NOT NULL,
   INDEX(name),
-  FOREIGN KEY (owner_id) REFERENCES owners(id),
+  FOREIGN KEY (owner_id) REFERENCES positions(id),
   FOREIGN KEY (type_id) REFERENCES types(id)
 ) engine=InnoDB;
 
