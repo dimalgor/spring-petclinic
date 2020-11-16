@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
-import org.springframework.samples.petclinic.model.Career;
+import org.springframework.samples.petclinic.model.Job;
 
 /**
  * Simple JavaBean domain object representing a veterinarian.
@@ -43,7 +43,7 @@ import org.springframework.samples.petclinic.model.Career;
  */
 @Entity
 @Table(name = "vets")
-public class Vet extends Career {
+public class Vet extends Job {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"),
