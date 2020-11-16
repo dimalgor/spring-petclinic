@@ -49,12 +49,12 @@ class VetControllerTests {
 	@BeforeEach
 	void setup() {
 		Vet james = new Vet();
-		james.setFirstName("James");
-		james.setLastName("Carter");
+		james.setArea("James");
+		james.setPosition("Carter");
 		james.setId(1);
 		Vet helen = new Vet();
-		helen.setFirstName("Helen");
-		helen.setLastName("Leary");
+		helen.setArea("Helen");
+		helen.setPosition("Leary");
 		helen.setId(2);
 		Specialty radiology = new Specialty();
 		radiology.setId(1);

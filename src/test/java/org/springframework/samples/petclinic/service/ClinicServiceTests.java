@@ -93,7 +93,7 @@ class ClinicServiceTests {
 	@Test
 	void shouldFindSingleOwnerWithPet() {
 		Owner owner = this.owners.findById(1);
-		assertThat(owner.getLastName()).startsWith("Franklin");
+		assertThat(owner.getPosition()).startsWith("Franklin");
 		assertThat(owner.getPets()).hasSize(1);
 		assertThat(owner.getPets().get(0).getType()).isNotNull();
 		assertThat(owner.getPets().get(0).getType().getName()).isEqualTo("cat");
@@ -106,8 +106,8 @@ class ClinicServiceTests {
 		int found = owners.size();
 
 		Owner owner = new Owner();
-		owner.setFirstName("Sam");
-		owner.setLastName("Schultz");
+		owner.setArea("Sam");
+		owner.setPosition("Schultz");
 		owner.setAddress("4, Evans Street");
 		owner.setCity("Wollongong");
 		owner.setTelephone("4444444444");
@@ -122,22 +122,22 @@ class ClinicServiceTests {
 	@Transactional
 	void shouldUpdateOwner() {
 		Owner owner = this.owners.findById(1);
-		String oldLastName = owner.getLastName();
+		String oldLastName = owner.getPosition();
 		String newLastName = oldLastName + "X";
 
-		owner.setLastName(newLastName);
+		owner.setPosition(newLastName);
 		this.owners.save(owner);
 
 		// retrieving new name from database
 		owner = this.owners.findById(1);
-		assertThat(owner.getLastName()).isEqualTo(newLastName);
+		assertThat(owner.getPosition()).isEqualTo(newLastName);
 	}
 
 	@Test
 	void shouldFindPetWithCorrectId() {
 		Pet pet7 = this.pets.findById(7);
 		assertThat(pet7.getName()).startsWith("Samantha");
-		assertThat(pet7.getOwner().getFirstName()).isEqualTo("Jean");
+		assertThat(pet7.getOwner().getArea()).isEqualTo("Jean");
 
 	}
 
@@ -193,7 +193,7 @@ class ClinicServiceTests {
 		Collection<Vet> vets = this.vets.findAll();
 
 		Vet vet = EntityUtils.getById(vets, Vet.class, 3);
-		assertThat(vet.getLastName()).isEqualTo("Douglas");
+		assertThat(vet.getPosition()).isEqualTo("Douglas");
 		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
 		assertThat(vet.getSpecialties().get(0).getName()).isEqualTo("dentistry");
 		assertThat(vet.getSpecialties().get(1).getName()).isEqualTo("surgery");
