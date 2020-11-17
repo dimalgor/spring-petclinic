@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.position;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,18 +31,18 @@ import java.util.Collection;
  * @author Arjen Poutsma
  */
 @Controller
-@RequestMapping("/owners/{ownerId}")
+@RequestMapping("/positions/{positionId}")
 class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
 	private final PetRepository pets;
 
-	private final OwnerRepository owners;
+	private final PositionsRepository positions;
 
-	public PetController(PetRepository pets, OwnerRepository owners) {
+	public PetController(PetRepository pets, PositionsRepository positions) {
 		this.pets = pets;
-		this.owners = owners;
+		this.positions = positions;
 	}
 
 	@ModelAttribute("types")
@@ -50,13 +50,13 @@ class PetController {
 		return this.pets.findPetTypes();
 	}
 
-	@ModelAttribute("owner")
-	public Owner findOwner(@PathVariable("ownerId") int ownerId) {
-		return this.owners.findById(ownerId);
+	@ModelAttribute("position")
+	public Position findPosition(@PathVariable("positionId") int positionId) {
+		return this.positions.findById(positionId);
 	}
 
-	@InitBinder("owner")
-	public void initOwnerBinder(WebDataBinder dataBinder) {
+	@InitBinder("position")
+	public void initPositionBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
 
@@ -66,26 +66,26 @@ class PetController {
 	}
 
 	@GetMapping("/pets/new")
-	public String initCreationForm(Owner owner, ModelMap model) {
+	public String initCreationForm(Position position, ModelMap model) {
 		Pet pet = new Pet();
-		owner.addPet(pet);
+		position.addPet(pet);
 		model.put("pet", pet);
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/pets/new")
-	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
-		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
+	public String processCreationForm(Position position, @Valid Pet pet, BindingResult result, ModelMap model) {
+		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && position.getPet(pet.getName(), true) != null) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
-		owner.addPet(pet);
+		position.addPet(pet);
 		if (result.hasErrors()) {
 			model.put("pet", pet);
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
 			this.pets.save(pet);
-			return "redirect:/owners/{ownerId}";
+			return "redirect:/positions/{positionId}";
 		}
 	}
 
@@ -97,16 +97,16 @@ class PetController {
 	}
 
 	@PostMapping("/pets/{petId}/edit")
-	public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
+	public String processUpdateForm(@Valid Pet pet, BindingResult result, Position position, ModelMap model) {
 		if (result.hasErrors()) {
-			pet.setOwner(owner);
+			pet.setPosition(position);
 			model.put("pet", pet);
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			owner.addPet(pet);
+			position.addPet(pet);
 			this.pets.save(pet);
-			return "redirect:/owners/{ownerId}";
+			return "redirect:/positions/{positionId}";
 		}
 	}
 

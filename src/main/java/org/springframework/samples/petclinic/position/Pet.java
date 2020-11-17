@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.position;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -57,8 +57,8 @@ public class Pet extends NamedEntity {
 	private PetType type;
 
 	@ManyToOne
-	@JoinColumn(name = "owner_id")
-	private Owner owner;
+	@JoinColumn(name = "position_id")
+	private Position position;
 
 	@Transient
 	private Set<Visit> visits = new LinkedHashSet<>();
@@ -79,12 +79,12 @@ public class Pet extends NamedEntity {
 		this.type = type;
 	}
 
-	public Owner getOwner() {
-		return this.owner;
+	public Position getPosition() {
+		return this.position;
 	}
 
-	protected void setOwner(Owner owner) {
-		this.owner = owner;
+	protected void setPosition(Position position) {
+		this.position = position;
 	}
 
 	protected Set<Visit> getVisitsInternal() {

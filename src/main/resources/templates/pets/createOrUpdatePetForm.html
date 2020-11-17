@@ -2,6 +2,7 @@
   th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 
 <body>
+<!--/*@thymesVar id="pet" type="org.springframework.samples.petclinic.position.Pet"*/-->
 
   <h2>
     <th:block th:if="${pet['new']}">New </th:block>
@@ -11,9 +12,9 @@
     <input type="hidden" name="id" th:value="*{id}" />
     <div class="form-group has-feedback">
       <div class="form-group">
-        <label class="col-sm-2 control-label">Owner</label>
+        <label class="col-sm-2 control-label">Position</label>
         <div class="col-sm-10">
-          <span th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" />
+          <span th:text="${pet.position?.area + ' ' + pet.position?.position}" />
         </div>
       </div>
       <input

@@ -6,10 +6,10 @@
   <body>
   
   
-    <h2>Owner Information</h2>
+    <h2>Position Information</h2>
   
   
-    <table class="table table-striped" th:object="${owner}">
+    <table class="table table-striped" th:object="${position}">
       <tr>
         <th>Name</th>
         <td><b th:text="*{area + ' ' + position}"></b></td>
@@ -28,10 +28,8 @@
       </tr>
     </table>
   
-    <a th:href="@{{id}/edit(id=${owner.id})}" class="btn btn-default">Edit
-      Owner</a>
-    <a th:href="@{{id}/pets/new(id=${owner.id})}" class="btn btn-default">Add
-      New Pet</a>
+    <a th:href="@{{id}/edit(id=${position.id})}" class="btn btn-default">Edit Position</a>
+    <a th:href="@{{id}/pets/new(id=${position.id})}" class="btn btn-default">Add New Pet</a>
   
     <br />
     <br />
@@ -40,7 +38,7 @@
   
     <table class="table table-striped">
   
-      <tr th:each="pet : ${owner.pets}">
+      <tr th:each="pet : ${position.pets}">
         <td valign="top">
           <dl class="dl-horizontal">
             <dt>Name</dt>
@@ -66,10 +64,10 @@
             </tr>
             <tr>
               <td><a
-                th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${owner.id},petId=${pet.id})}">Edit
+                th:href="@{{positionId}/pets/{petId}/edit(positionId=${position.id},petId=${pet.id})}">Edit
                   Pet</a></td>
               <td><a
-                th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                th:href="@{{positionId}/pets/{petId}/visits/new(positionId=${position.id},petId=${pet.id})}">Add
                   Visit</a></td>
             </tr>
           </table>

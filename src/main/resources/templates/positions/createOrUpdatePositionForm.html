@@ -3,8 +3,9 @@
 
 <body>
 
-  <h2>Owner</h2>
-  <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
+  <h2>Position</h2>
+  <!--/*@thymesVar id="position" type="org.springframework.samples.petclinic.position.Position"*/-->
+  <form th:object="${position}" class="form-horizontal" id="add-owner-form" method="post">
     <div class="form-group has-feedback">
       <input
         th:replace="~{fragments/inputField :: input ('Area', 'area', 'text')}" />
@@ -20,9 +21,8 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button
-          th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-          class="btn btn-default" type="submit" th:text="${text}">Add
-          Owner</button>
+          th:with="text=${position['new']} ? 'Add Position' : 'Update Position'"
+          class="btn btn-default" type="submit" th:text="${text}">Add Position</button>
       </div>
     </div>
   </form>

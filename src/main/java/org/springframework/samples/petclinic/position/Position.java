@@ -1,19 +1,4 @@
-/*
- * Copyright 2012-2019 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.position;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,17 +19,9 @@ import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.Job;
 
-/**
- * Simple JavaBean domain object representing an owner.
- *
- * @author Ken Krebs
- * @author Juergen Hoeller
- * @author Sam Brannen
- * @author Michael Isvy
- */
 @Entity
 @Table(name = "positions")
-public class Owner extends Job {
+public class Position extends Job {
 
 	@Column(name = "address")
 	@NotEmpty
@@ -59,7 +36,7 @@ public class Owner extends Job {
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "position")
 	private Set<Pet> pets;
 
 	public String getAddress() {
@@ -107,11 +84,11 @@ public class Owner extends Job {
 		if (pet.isNew()) {
 			getPetsInternal().add(pet);
 		}
-		pet.setOwner(this);
+		pet.setPosition(this);
 	}
 
 	/**
-	 * Return the Pet with the given name, or null if none found for this Owner.
+	 * Return the Pet with the given name, or null if none found for this Position.
 	 * @param name to test
 	 * @return true if pet name is already in use
 	 */
@@ -142,9 +119,10 @@ public class Owner extends Job {
 	public String toString() {
 		return new ToStringCreator(this)
 
-				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getPosition())
-				.append("firstName", this.getArea()).append("address", this.address).append("city", this.city)
-				.append("telephone", this.telephone).toString();
+			.append("id", this.getId()).append("new", this.isNew()).append("position", this.getPosition())
+			.append("area", this.getArea()).append("address", this.address).append("city", this.city)
+			.append("telephone", this.telephone).toString();
 	}
 
 }
+

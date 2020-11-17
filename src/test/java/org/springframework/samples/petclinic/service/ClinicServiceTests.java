@@ -25,11 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.Pet;
-import org.springframework.samples.petclinic.owner.PetRepository;
-import org.springframework.samples.petclinic.owner.PetType;
+import org.springframework.samples.petclinic.position.*;
 import org.springframework.samples.petclinic.vet.Vet;
 import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.samples.petclinic.visit.Visit;
@@ -48,8 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  * time between test execution.</li>
  * <li><strong>Dependency Injection</strong> of test fixture instances, meaning that we
  * don't need to perform application context lookups. See the use of
- * {@link Autowired @Autowired} on the <code>{@link
- * ClinicServiceTests#clinicService clinicService}</code> instance variable, which uses
+ * {@link Autowired @Autowired} on the <code> </code> instance variable, which uses
  * autowiring <em>by type</em>.
  * <li><strong>Transaction management</strong>, meaning each test method is executed in
  * its own transaction, which is automatically rolled back by default. Thus, even if tests
@@ -70,7 +65,7 @@ import org.springframework.transaction.annotation.Transactional;
 class ClinicServiceTests {
 
 	@Autowired
-	protected OwnerRepository owners;
+	protected PositionsRepository positions;
 
 	@Autowired
 	protected PetRepository pets;
@@ -82,62 +77,64 @@ class ClinicServiceTests {
 	protected VetRepository vets;
 
 	@Test
-	void shouldFindOwnersByLastName() {
-		Collection<Owner> owners = this.owners.findByLastName("Davis");
-		assertThat(owners).hasSize(2);
+	void shouldFindPositionsByLastName() {
+		Collection<Position> positions = this.positions.findByPosition("Java / R&D Engineer");
+		assertThat(positions).hasSize(1);
 
-		owners = this.owners.findByLastName("Daviss");
-		assertThat(owners).isEmpty();
+		positions = this.positions.findByPosition("Clown");
+		assertThat(positions).isEmpty();
 	}
 
 	@Test
-	void shouldFindSingleOwnerWithPet() {
-		Owner owner = this.owners.findById(1);
-		assertThat(owner.getPosition()).startsWith("Franklin");
-		assertThat(owner.getPets()).hasSize(1);
-		assertThat(owner.getPets().get(0).getType()).isNotNull();
-		assertThat(owner.getPets().get(0).getType().getName()).isEqualTo("cat");
-	}
-
-	@Test
-	@Transactional
-	void shouldInsertOwner() {
-		Collection<Owner> owners = this.owners.findByLastName("Schultz");
-		int found = owners.size();
-
-		Owner owner = new Owner();
-		owner.setArea("Sam");
-		owner.setPosition("Schultz");
-		owner.setAddress("4, Evans Street");
-		owner.setCity("Wollongong");
-		owner.setTelephone("4444444444");
-		this.owners.save(owner);
-		assertThat(owner.getId().longValue()).isNotEqualTo(0);
-
-		owners = this.owners.findByLastName("Schultz");
-		assertThat(owners.size()).isEqualTo(found + 1);
+	void shouldFindSinglePositionWithPet() {
+		Position position = this.positions.findById(1);
+		assertThat(position.getPosition()).endsWith("Engineer");
+		assertThat(position.getPets()).hasSize(1);
+		assertThat(position.getPets().get(0).getType()).isNotNull();
+		assertThat(position.getPets().get(0).getType().getName()).isEqualTo("cat");
 	}
 
 	@Test
 	@Transactional
-	void shouldUpdateOwner() {
-		Owner owner = this.owners.findById(1);
-		String oldLastName = owner.getPosition();
+	void shouldInsertPosition() {
+		Collection<Position> positions = this.positions.findByPosition("Schultz");
+		int found = positions.size();
+
+		Position position = new Position();
+		position.setArea("Sam");
+		position.setPosition("Schultz");
+		position.setAddress("4, Evans Street");
+		position.setCity("Wollongong");
+		position.setTelephone("4444444444");
+		this.positions.save(position);
+		assertThat(position.getId().longValue()).isNotEqualTo(0);
+
+		positions = this.positions.findByPosition("Schultz");
+		assertThat(positions.size()).isEqualTo(found + 1);
+	}
+
+	@Test
+	@Transactional
+	void shouldUpdatePosition() {
+		Position position = this.positions.findById(1);
+		String oldLastName = position.getPosition();
 		String newLastName = oldLastName + "X";
 
-		owner.setPosition(newLastName);
-		this.owners.save(owner);
+		position.setPosition(newLastName);
+		this.positions.save(position);
 
 		// retrieving new name from database
-		owner = this.owners.findById(1);
-		assertThat(owner.getPosition()).isEqualTo(newLastName);
+		position = this.positions.findById(1);
+		assertThat(position.getPosition()).isEqualTo(newLastName);
 	}
 
 	@Test
 	void shouldFindPetWithCorrectId() {
 		Pet pet7 = this.pets.findById(7);
+
+		System.out.println(pet7.toString());
 		assertThat(pet7.getName()).startsWith("Samantha");
-		assertThat(pet7.getOwner().getArea()).isEqualTo("Jean");
+		assertThat(pet7.getPosition().getArea()).isEqualTo("Information Technology");
 
 	}
 
@@ -154,22 +151,22 @@ class ClinicServiceTests {
 	@Test
 	@Transactional
 	void shouldInsertPetIntoDatabaseAndGenerateId() {
-		Owner owner6 = this.owners.findById(6);
-		int found = owner6.getPets().size();
+		Position position6 = this.positions.findById(6);
+		int found = position6.getPets().size();
 
 		Pet pet = new Pet();
 		pet.setName("bowser");
 		Collection<PetType> types = this.pets.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
-		owner6.addPet(pet);
-		assertThat(owner6.getPets().size()).isEqualTo(found + 1);
+		position6.addPet(pet);
+		assertThat(position6.getPets().size()).isEqualTo(found + 1);
 
 		this.pets.save(pet);
-		this.owners.save(owner6);
+		this.positions.save(position6);
 
-		owner6 = this.owners.findById(6);
-		assertThat(owner6.getPets().size()).isEqualTo(found + 1);
+		position6 = this.positions.findById(6);
+		assertThat(position6.getPets().size()).isEqualTo(found + 1);
 		// checks that id has been generated
 		assertThat(pet.getId()).isNotNull();
 	}

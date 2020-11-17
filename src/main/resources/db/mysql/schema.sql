@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS vets (
   id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  first_name VARCHAR(30),
-  last_name VARCHAR(30),
-  INDEX(last_name)
+  area VARCHAR(50),
+  position VARCHAR(100),
+  INDEX(position)
 ) engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS specialties (
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS pets (
   name VARCHAR(30),
   birth_date DATE,
   type_id INT(4) UNSIGNED NOT NULL,
-  owner_id INT(4) UNSIGNED NOT NULL,
+  position_id INT(4) UNSIGNED NOT NULL,
   INDEX(name),
-  FOREIGN KEY (owner_id) REFERENCES positions(id),
+  FOREIGN KEY (position_id) REFERENCES positions(id),
   FOREIGN KEY (type_id) REFERENCES types(id)
 ) engine=InnoDB;
 

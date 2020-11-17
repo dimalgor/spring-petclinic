@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.position;
 
 import java.util.Map;
 
@@ -72,20 +72,20 @@ class VisitController {
 	}
 
 	// Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
-	@GetMapping("/owners/*/pets/{petId}/visits/new")
+	@GetMapping("/positions/*/pets/{petId}/visits/new")
 	public String initNewVisitForm(@PathVariable("petId") int petId, Map<String, Object> model) {
 		return "pets/createOrUpdateVisitForm";
 	}
 
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
-	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
+	@PostMapping("/positions/{positionId}/pets/{petId}/visits/new")
 	public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
 		else {
 			this.visits.save(visit);
-			return "redirect:/owners/{ownerId}";
+			return "redirect:/positions/{positionId}";
 		}
 	}
 

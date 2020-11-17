@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.position;
 
 import java.text.ParseException;
 import java.util.ArrayList;
