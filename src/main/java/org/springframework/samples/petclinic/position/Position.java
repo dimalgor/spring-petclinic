@@ -26,6 +26,7 @@ import org.springframework.samples.petclinic.model.Job;
 public class Position extends Job {
 
 	@Column(name = "start_date")
+//	@NotEmpty
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 
@@ -33,21 +34,8 @@ public class Position extends Job {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate endDate;
 
-	@Column(name = "telephone")
-	@NotEmpty
-	@Digits(fraction = 0, integer = 10)
-	private String telephone;
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "position")
 	private Set<Pet> pets;
-
-	public String getTelephone() {
-		return this.telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
 
 	protected Set<Pet> getPetsInternal() {
 		if (this.pets == null) {
@@ -120,10 +108,8 @@ public class Position extends Job {
 	@Override
 	public String toString() {
 		return new ToStringCreator(this)
-
 			.append("id", this.getId()).append("new", this.isNew()).append("position", this.getJobPosition())
-			.append("area", this.getArea()).append("startDate", this.startDate).append("endDate", this.endDate)
-			.append("telephone", this.telephone).toString();
+			.append("area", this.getArea()).append("startDate", this.startDate).append("endDate", this.endDate).toString();
 	}
 
 }
