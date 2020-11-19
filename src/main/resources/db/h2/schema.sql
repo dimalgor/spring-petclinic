@@ -39,7 +39,8 @@ CREATE TABLE positions (
   position  VARCHAR_IGNORECASE(100),
   city       VARCHAR(80),
   telephone  VARCHAR(20),
-  start_date DATE
+  start_date DATE,
+  end_date DATE
 );
 CREATE INDEX positions_position ON positions (position);
 

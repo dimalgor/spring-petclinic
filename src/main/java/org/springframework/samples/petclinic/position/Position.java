@@ -29,6 +29,10 @@ public class Position extends Job {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 
+	@Column(name = "end_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate endDate;
+
 	@Column(name = "city")
 	@NotEmpty
 	private String city;
@@ -115,6 +119,14 @@ public class Position extends Job {
 
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override

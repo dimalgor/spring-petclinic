@@ -30,6 +30,10 @@
         <th>Start date</th>
         <td th:text="*{startDate}"></td>
       </tr>
+      <tr>
+        <th>End date</th>
+        <td th:text="*{endDate}"></td>
+      </tr>
     </table>
   
     <a th:href="@{{id}/edit(id=${position.id})}" class="btn btn-default">Edit Position</a>
