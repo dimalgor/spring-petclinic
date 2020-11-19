@@ -97,7 +97,7 @@ public class Position extends Job {
 	}
 
 	/**
-	 * Return the Pet with the given name, or null if none found for this Owner.
+	 * Return the Pet with the given name, or null if none found for this Position.
 	 * @param name to test
 	 * @return true if pet name is already in use
 	 */
