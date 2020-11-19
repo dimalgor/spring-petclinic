@@ -65,7 +65,6 @@ class PositionsControllerTests {
 		george.setId(TEST_POSITION_ID);
 		george.setArea("George");
 		george.setJobPosition("Franklin");
-		george.setCity("Madison");
 		george.setTelephone("6085551023");
 		Pet max = new Pet();
 		PetType dog = new PetType();
@@ -136,7 +135,6 @@ class PositionsControllerTests {
 				.andExpect(model().attributeExists("position"))
 				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
-				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))
 				.andExpect(model().attribute("position", hasProperty("telephone", is("6085551023"))))
 				.andExpect(view().name("positions/createOrUpdatePositionForm"));
 	}
@@ -163,7 +161,6 @@ class PositionsControllerTests {
 		mockMvc.perform(get("/positions/{position}", TEST_POSITION_ID)).andExpect(status().isOk())
 				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
-				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))
 				.andExpect(model().attribute("position", hasProperty("telephone", is("6085551023"))))
 				.andExpect(model().attribute("position", hasProperty("pets", not(empty()))))
 				.andExpect(model().attribute("position", hasProperty("pets", new BaseMatcher<List<Pet>>() {

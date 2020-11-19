@@ -22,13 +22,13 @@ INSERT INTO types VALUES (4, 'snake');
 INSERT INTO types VALUES (5, 'bird');
 INSERT INTO types VALUES (6, 'hamster');
 
-INSERT INTO positions VALUES (1, 'Medicine', 'Spiral Computer Tomograph Engineer', 'Kharkiv', '6085551023', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (2, 'Entrepreneurship', 'Private Entrepreneur', 'Kharkiv', '6085551749', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (3, 'Information Technology', 'Lua Developer', 'Kharkiv', '6085558763', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (4, 'Information Technology', 'BlackBerry Developer', 'Kharkiv', '6085553198', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (5, 'Information Technology', 'Mobile Developer', 'Kharkiv', '6085552765', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (6, 'Information Technology', 'Mobile Automation Engineer', 'Kharkiv', '6085552654', '2011-08-06', '2011-08-06');
-INSERT INTO positions VALUES (7, 'Information Technology', 'Java / R&D Engineer', 'Kharkiv', '6085555387', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (1, 'Medicine', 'Spiral Computer Tomograph Engineer', '6085551023', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (2, 'Entrepreneurship', 'Private Entrepreneur', '6085551749', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (3, 'Information Technology', 'Lua Developer', '6085558763', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (4, 'Information Technology', 'BlackBerry Developer', '6085553198', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (5, 'Information Technology', 'Mobile Developer', '6085552765', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (6, 'Information Technology', 'Mobile Automation Engineer', '6085552654', '2011-08-06', '2011-08-06');
+INSERT INTO positions VALUES (7, 'Information Technology', 'Java / R&D Engineer', '6085555387', '2011-08-06', '2011-08-06');
 
 INSERT INTO pets VALUES (1, 'Leo', '2010-09-07', 1, 1);
 INSERT INTO pets VALUES (2, 'Basil', '2012-08-06', 6, 2);

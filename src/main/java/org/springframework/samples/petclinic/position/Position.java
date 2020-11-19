@@ -33,10 +33,6 @@ public class Position extends Job {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate endDate;
 
-	@Column(name = "city")
-	@NotEmpty
-	private String city;
-
 	@Column(name = "telephone")
 	@NotEmpty
 	@Digits(fraction = 0, integer = 10)
@@ -44,14 +40,6 @@ public class Position extends Job {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "position")
 	private Set<Pet> pets;
-
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	public String getTelephone() {
 		return this.telephone;
@@ -134,7 +122,7 @@ public class Position extends Job {
 		return new ToStringCreator(this)
 
 			.append("id", this.getId()).append("new", this.isNew()).append("position", this.getJobPosition())
-			.append("area", this.getArea()).append("startDate", this.startDate).append("city", this.city)
+			.append("area", this.getArea()).append("startDate", this.startDate).append("endDate", this.endDate)
 			.append("telephone", this.telephone).toString();
 	}
 
