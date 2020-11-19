@@ -29,9 +29,9 @@ public class Position extends Job {
 	@NotEmpty
 	private String address;
 
-	/*@Column(name = "start_date")
+	@Column(name = "start_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate startDate;*/
+	private LocalDate startDate;
 
 	@Column(name = "city")
 	@NotEmpty
@@ -119,6 +119,14 @@ public class Position extends Job {
 			}
 		}
 		return null;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
 	@Override

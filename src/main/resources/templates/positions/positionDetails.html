@@ -30,6 +30,10 @@
         <th>Telephone</th>
         <td th:text="*{telephone}"></td>
       </tr>
+      <tr>
+        <th>Start date</th>
+        <td th:text="*{startDate}"></td>
+      </tr>
     </table>
   
     <a th:href="@{{id}/edit(id=${position.id})}" class="btn btn-default">Edit Position</a>
