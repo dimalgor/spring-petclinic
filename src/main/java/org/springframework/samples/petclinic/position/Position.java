@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.position;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.Job;
 
 @Entity
@@ -26,6 +28,10 @@ public class Position extends Job {
 	@Column(name = "address")
 	@NotEmpty
 	private String address;
+
+	/*@Column(name = "start_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;*/
 
 	@Column(name = "city")
 	@NotEmpty
