@@ -119,7 +119,7 @@ public class Position extends Job {
 	public String toString() {
 		return new ToStringCreator(this)
 
-			.append("id", this.getId()).append("new", this.isNew()).append("position", this.getPosition())
+			.append("id", this.getId()).append("new", this.isNew()).append("position", this.getJobPosition())
 			.append("area", this.getArea()).append("address", this.address).append("city", this.city)
 			.append("telephone", this.telephone).toString();
 	}

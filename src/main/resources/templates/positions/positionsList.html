@@ -19,7 +19,7 @@
         <tbody>
           <tr th:each="position : ${selections}">
               <td>
-                  <a th:href="@{/positions/__${position.id}__}" th:text="${position.area + ' ' + position.position}"/></a>
+                  <a th:href="@{/positions/__${position.id}__}" th:text="${position.area + ' ' + position.jobPosition}"/></a>
               </td>
               <td th:text="${position.address}"/>
               <td th:text="${position.city}"/>

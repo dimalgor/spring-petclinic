@@ -46,7 +46,7 @@ class ValidatorTests {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Job job = new Job();
 		job.setArea("");
-		job.setPosition("Java Developer");
+		job.setJobPosition("Java Developer");
 
 		Validator validator = createValidator();
 		Set<ConstraintViolation<Job>> constraintViolations = validator.validate(job);

@@ -77,15 +77,15 @@ class PositionsController {
 	public String processFindForm(Position position, BindingResult result, Map<String, Object> model) {
 
 		// allow parameterless GET request for /positions to return all records
-		if (position.getPosition() == null) {
-			position.setPosition(""); // empty string signifies broadest possible search
+		if (position.getJobPosition() == null) {
+			position.setJobPosition(""); // empty string signifies broadest possible search
 		}
 
 		// find positions by last name
-		Collection<Position> results = this.positions.findByPosition(position.getPosition());
+		Collection<Position> results = this.positions.findByPosition(position.getJobPosition());
 		if (results.isEmpty()) {
 			// no positions found
-			result.rejectValue("area", "notFound", "not found");
+			result.rejectValue("jobPosition", "notFound", "not found");
 			return "positions/findPositions";
 		}
 		else if (results.size() == 1) {

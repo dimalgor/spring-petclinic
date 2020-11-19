@@ -33,7 +33,7 @@ public class Job extends BaseEntity {
 
 	@Column(name = "position")
 	@NotEmpty
-	private String position;
+	private String jobPosition;
 
 	public String getArea() {
 		return this.area;
@@ -43,12 +43,12 @@ public class Job extends BaseEntity {
 		this.area = area;
 	}
 
-	public String getPosition() {
-		return this.position;
+	public String getJobPosition() {
+		return this.jobPosition;
 	}
 
-	public void setPosition(String lastName) {
-		this.position = lastName;
+	public void setJobPosition(String lastName) {
+		this.jobPosition = lastName;
 	}
 
 }

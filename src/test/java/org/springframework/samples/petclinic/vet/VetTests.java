@@ -29,11 +29,11 @@ class VetTests {
 	void testSerialization() {
 		Vet vet = new Vet();
 		vet.setArea("Zaphod");
-		vet.setPosition("Beeblebrox");
+		vet.setJobPosition("Beeblebrox");
 		vet.setId(123);
 		Vet other = (Vet) SerializationUtils.deserialize(SerializationUtils.serialize(vet));
 		assertThat(other.getArea()).isEqualTo(vet.getArea());
-		assertThat(other.getPosition()).isEqualTo(vet.getPosition());
+		assertThat(other.getJobPosition()).isEqualTo(vet.getJobPosition());
 		assertThat(other.getId()).isEqualTo(vet.getId());
 	}
 

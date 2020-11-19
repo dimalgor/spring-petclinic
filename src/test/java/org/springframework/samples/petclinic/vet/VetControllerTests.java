@@ -50,11 +50,11 @@ class VetControllerTests {
 	void setup() {
 		Vet james = new Vet();
 		james.setArea("James");
-		james.setPosition("Carter");
+		james.setJobPosition("Carter");
 		james.setId(1);
 		Vet helen = new Vet();
 		helen.setArea("Helen");
-		helen.setPosition("Leary");
+		helen.setJobPosition("Leary");
 		helen.setId(2);
 		Specialty radiology = new Specialty();
 		radiology.setId(1);

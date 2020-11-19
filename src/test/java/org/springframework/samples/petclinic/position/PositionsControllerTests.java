@@ -64,7 +64,7 @@ class PositionsControllerTests {
 		george = new Position();
 		george.setId(TEST_POSITION_ID);
 		george.setArea("George");
-		george.setPosition("Franklin");
+		george.setJobPosition("Franklin");
 		george.setAddress("110 W. Liberty St.");
 		george.setCity("Madison");
 		george.setTelephone("6085551023");
@@ -90,7 +90,7 @@ class PositionsControllerTests {
 
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/positions/new").param("area", "Joe").param("position", "Bloggs")
+		mockMvc.perform(post("/positions/new").param("area", "Joe").param("jobPosition", "Bloggs")
 				.param("address", "123 Caramel Street").param("city", "London").param("telephone", "01316761638"))
 				.andExpect(status().is3xxRedirection());
 	}
@@ -119,16 +119,16 @@ class PositionsControllerTests {
 
 	@Test
 	void testProcessFindFormByPosition() throws Exception {
-		given(this.positions.findByPosition(george.getPosition())).willReturn(Lists.newArrayList(george));
-		mockMvc.perform(get("/positions").param("position", "Franklin")).andExpect(status().is3xxRedirection())
+		given(this.positions.findByPosition(george.getJobPosition())).willReturn(Lists.newArrayList(george));
+		mockMvc.perform(get("/positions").param("jobPosition", "Franklin")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/positions/" + TEST_POSITION_ID));
 	}
 
 	@Test
 	void testProcessFindFormNoPositionsFound() throws Exception {
-		mockMvc.perform(get("/positions").param("position", "Unknown Position")).andExpect(status().isOk())
-				.andExpect(model().attributeHasFieldErrors("position", "area"))
-				.andExpect(model().attributeHasFieldErrorCode("position", "position", "notFound"))
+		mockMvc.perform(get("/positions").param("jobPosition", "Unknown Position")).andExpect(status().isOk())
+				.andExpect(model().attributeHasFieldErrors("position", "jobPosition"))
+				.andExpect(model().attributeHasFieldErrorCode("position", "jobPosition", "notFound"))
 				.andExpect(view().name("positions/findPositions"));
 	}
 
@@ -136,7 +136,7 @@ class PositionsControllerTests {
 	void testInitUpdatePositionForm() throws Exception {
 		mockMvc.perform(get("/positions/{positionId}/edit", TEST_POSITION_ID)).andExpect(status().isOk())
 				.andExpect(model().attributeExists("position"))
-				.andExpect(model().attribute("position", hasProperty("position", is("Franklin"))))
+				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
 				.andExpect(model().attribute("position", hasProperty("address", is("110 W. Liberty St."))))
 				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))
@@ -147,7 +147,7 @@ class PositionsControllerTests {
 	@Test
 	void testProcessUpdatePositionFormSuccess() throws Exception {
 		mockMvc.perform(post("/positions/{positionId}/edit", TEST_POSITION_ID).param("area", "Joe")
-				.param("position", "Bloggs").param("address", "123 Caramel Street").param("city", "London")
+				.param("jobPosition", "Bloggs").param("address", "123 Caramel Street").param("city", "London")
 				.param("telephone", "01616291589")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/positions/{positionId}"));
 	}
@@ -165,7 +165,7 @@ class PositionsControllerTests {
 	@Test
 	void testShowPosition() throws Exception {
 		mockMvc.perform(get("/positions/{position}", TEST_POSITION_ID)).andExpect(status().isOk())
-				.andExpect(model().attribute("position", hasProperty("position", is("Franklin"))))
+				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
 				.andExpect(model().attribute("position", hasProperty("address", is("110 W. Liberty St."))))
 				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))

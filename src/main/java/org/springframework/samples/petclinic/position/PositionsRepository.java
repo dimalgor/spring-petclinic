@@ -42,7 +42,7 @@ public interface PositionsRepository extends Repository<Position, Integer> {
 	 * @return a Collection of matching {@link Position}s (or an empty Collection if none
 	 * found)
 	 */
-	@Query("SELECT DISTINCT position FROM Position position left join fetch position.pets WHERE position.position LIKE :position%")
+	@Query("SELECT DISTINCT position FROM Position position left join fetch position.pets WHERE position.jobPosition LIKE :position%")
 	@Transactional(readOnly = true)
 	Collection<Position> findByPosition(@Param("position") String position);
 

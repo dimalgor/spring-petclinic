@@ -88,7 +88,7 @@ class ClinicServiceTests {
 	@Test
 	void shouldFindSinglePositionWithPet() {
 		Position position = this.positions.findById(1);
-		assertThat(position.getPosition()).endsWith("Engineer");
+		assertThat(position.getJobPosition()).endsWith("Engineer");
 		assertThat(position.getPets()).hasSize(1);
 		assertThat(position.getPets().get(0).getType()).isNotNull();
 		assertThat(position.getPets().get(0).getType().getName()).isEqualTo("cat");
@@ -102,7 +102,7 @@ class ClinicServiceTests {
 
 		Position position = new Position();
 		position.setArea("Sam");
-		position.setPosition("Schultz");
+		position.setJobPosition("Schultz");
 		position.setAddress("4, Evans Street");
 		position.setCity("Wollongong");
 		position.setTelephone("4444444444");
@@ -117,15 +117,15 @@ class ClinicServiceTests {
 	@Transactional
 	void shouldUpdatePosition() {
 		Position position = this.positions.findById(1);
-		String oldLastName = position.getPosition();
+		String oldLastName = position.getJobPosition();
 		String newLastName = oldLastName + "X";
 
-		position.setPosition(newLastName);
+		position.setJobPosition(newLastName);
 		this.positions.save(position);
 
 		// retrieving new name from database
 		position = this.positions.findById(1);
-		assertThat(position.getPosition()).isEqualTo(newLastName);
+		assertThat(position.getJobPosition()).isEqualTo(newLastName);
 	}
 
 	@Test
@@ -190,7 +190,7 @@ class ClinicServiceTests {
 		Collection<Vet> vets = this.vets.findAll();
 
 		Vet vet = EntityUtils.getById(vets, Vet.class, 3);
-		assertThat(vet.getPosition()).isEqualTo("Douglas");
+		assertThat(vet.getJobPosition()).isEqualTo("Douglas");
 		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
 		assertThat(vet.getSpecialties().get(0).getName()).isEqualTo("dentistry");
 		assertThat(vet.getSpecialties().get(1).getName()).isEqualTo("surgery");
