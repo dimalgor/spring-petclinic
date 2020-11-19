@@ -65,7 +65,6 @@ class PositionsControllerTests {
 		george.setId(TEST_POSITION_ID);
 		george.setArea("George");
 		george.setJobPosition("Franklin");
-		george.setAddress("110 W. Liberty St.");
 		george.setCity("Madison");
 		george.setTelephone("6085551023");
 		Pet max = new Pet();
@@ -100,7 +99,6 @@ class PositionsControllerTests {
 		mockMvc.perform(
 				post("/positions/new").param("area", "Joe").param("position", "Bloggs").param("city", "London"))
 				.andExpect(status().isOk()).andExpect(model().attributeHasErrors("position"))
-				.andExpect(model().attributeHasFieldErrors("position", "address"))
 				.andExpect(model().attributeHasFieldErrors("position", "telephone"))
 				.andExpect(view().name("positions/createOrUpdatePositionForm"));
 	}
@@ -138,7 +136,6 @@ class PositionsControllerTests {
 				.andExpect(model().attributeExists("position"))
 				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
-				.andExpect(model().attribute("position", hasProperty("address", is("110 W. Liberty St."))))
 				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))
 				.andExpect(model().attribute("position", hasProperty("telephone", is("6085551023"))))
 				.andExpect(view().name("positions/createOrUpdatePositionForm"));
@@ -157,7 +154,6 @@ class PositionsControllerTests {
 		mockMvc.perform(post("/positions/{positionId}/edit", TEST_POSITION_ID).param("area", "Joe")
 				.param("position", "Bloggs").param("city", "London")).andExpect(status().isOk())
 				.andExpect(model().attributeHasErrors("position"))
-				.andExpect(model().attributeHasFieldErrors("position", "address"))
 				.andExpect(model().attributeHasFieldErrors("position", "telephone"))
 				.andExpect(view().name("positions/createOrUpdatePositionForm"));
 	}
@@ -167,7 +163,6 @@ class PositionsControllerTests {
 		mockMvc.perform(get("/positions/{position}", TEST_POSITION_ID)).andExpect(status().isOk())
 				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
-				.andExpect(model().attribute("position", hasProperty("address", is("110 W. Liberty St."))))
 				.andExpect(model().attribute("position", hasProperty("city", is("Madison"))))
 				.andExpect(model().attribute("position", hasProperty("telephone", is("6085551023"))))
 				.andExpect(model().attribute("position", hasProperty("pets", not(empty()))))

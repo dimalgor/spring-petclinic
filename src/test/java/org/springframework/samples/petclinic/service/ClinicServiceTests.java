@@ -103,7 +103,6 @@ class ClinicServiceTests {
 		Position position = new Position();
 		position.setArea("Sam");
 		position.setJobPosition("Schultz");
-		position.setAddress("4, Evans Street");
 		position.setCity("Wollongong");
 		position.setTelephone("4444444444");
 		this.positions.save(position);

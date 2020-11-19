@@ -37,7 +37,6 @@ CREATE TABLE positions (
   id         INTEGER IDENTITY PRIMARY KEY,
   area VARCHAR(50),
   position  VARCHAR_IGNORECASE(100),
-  address    VARCHAR(255),
   city       VARCHAR(80),
   telephone  VARCHAR(20),
   start_date DATE

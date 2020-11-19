@@ -11,7 +11,6 @@
         <tr>
             <th style="width: 200px;">Position</th>
             <th style="width: 200px;">Area</th>
-            <th style="width: 200px;">Address</th>
             <th>City</th>
             <th style="width: 120px">Telephone</th>
             <th style="width: 120px">Start date</th>
@@ -24,7 +23,6 @@
                   <a th:href="@{/positions/__${position.id}__}" th:text="${position.jobPosition}"/></a>
               </td>
               <td th:text="${position.area}"/>
-              <td th:text="${position.address}"/>
               <td th:text="${position.city}"/>
               <td th:text="${position.telephone}"/>
               <td th:text="${position.startDate}"/>
