@@ -9,7 +9,8 @@
     <table id="owners" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Area & Position</th>
+            <th style="width: 200px;">Position</th>
+            <th style="width: 200px;">Area</th>
             <th style="width: 200px;">Address</th>
             <th>City</th>
             <th style="width: 120px">Telephone</th>
@@ -19,8 +20,9 @@
         <tbody>
           <tr th:each="position : ${selections}">
               <td>
-                  <a th:href="@{/positions/__${position.id}__}" th:text="${position.area + ' ' + position.jobPosition}"/></a>
+                  <a th:href="@{/positions/__${position.id}__}" th:text="${position.jobPosition}"/></a>
               </td>
+              <td th:text="${position.area}"/>
               <td th:text="${position.address}"/>
               <td th:text="${position.city}"/>
               <td th:text="${position.telephone}"/>

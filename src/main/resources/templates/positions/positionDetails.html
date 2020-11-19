@@ -11,8 +11,12 @@
   
     <table class="table table-striped" th:object="${position}">
       <tr>
-        <th>Name</th>
-        <td><b th:text="*{area + ' ' + jobPosition}"></b></td>
+        <th>Position</th>
+        <td><b th:text="*{jobPosition}"></b></td>
+      </tr>
+      <tr>
+        <th>Area</th>
+        <td><b th:text="*{area}"></b></td>
       </tr>
       <tr>
         <th>Address</th>

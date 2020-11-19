@@ -8,9 +8,9 @@
   <form th:object="${position}" class="form-horizontal" id="add-owner-form" method="post">
     <div class="form-group has-feedback">
       <input
-        th:replace="~{fragments/inputField :: input ('Area', 'area', 'text')}" />
-      <input
         th:replace="~{fragments/inputField :: input ('Position', 'jobPosition', 'text')}" />
+      <input
+        th:replace="~{fragments/inputField :: input ('Area', 'area', 'text')}" />
       <input
         th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
       <input
