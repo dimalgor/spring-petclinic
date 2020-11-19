@@ -90,7 +90,7 @@ class PositionsControllerTests {
 		mockMvc.perform(post("/positions/new")
 			.param("area", "Joe")
 			.param("jobPosition", "Bloggs")
-			.param("startDate", "2020-11-19"))
+			.param("startDate", "2020-11-13"))
 			.andExpect(status().is3xxRedirection());
 	}
 
