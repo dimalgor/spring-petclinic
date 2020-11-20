@@ -114,8 +114,8 @@ class PositionsController {
 	public ModelAndView showPosition(@PathVariable("positionId") int positioId) {
 		ModelAndView mav = new ModelAndView("positions/positionDetails");
 		Position position = this.positions.findById(positioId);
-		for (Pet pet : position.getPets()) {
-			pet.setVisitsInternal(visits.findByPetId(pet.getId()));
+		for (Company company : position.getCompanies()) {
+			company.setVisitsInternal(visits.findByCompanyId(company.getId()));
 		}
 		mav.addObject(position);
 		return mav;

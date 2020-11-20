@@ -65,18 +65,18 @@ class PositionsControllerTests {
 		george.setId(TEST_POSITION_ID);
 		george.setArea("George");
 		george.setJobPosition("Franklin");
-		Pet max = new Pet();
-		PetType dog = new PetType();
+		Company max = new Company();
+		CompanyType dog = new CompanyType();
 		dog.setName("dog");
 		max.setId(1);
 		max.setType(dog);
 		max.setName("Max");
 		max.setBirthDate(LocalDate.now());
-		george.setPetsInternal(Collections.singleton(max));
+		george.setCompaniesInternal(Collections.singleton(max));
 		given(this.positions.findById(TEST_POSITION_ID)).willReturn(george);
 		Visit visit = new Visit();
 		visit.setDate(LocalDate.now());
-		given(this.visits.findByPetId(max.getId())).willReturn(Collections.singletonList(visit));
+		given(this.visits.findByCompanyId(max.getId())).willReturn(Collections.singletonList(visit));
 	}
 
 	@Test
@@ -159,15 +159,15 @@ class PositionsControllerTests {
 		mockMvc.perform(get("/positions/{position}", TEST_POSITION_ID)).andExpect(status().isOk())
 				.andExpect(model().attribute("position", hasProperty("jobPosition", is("Franklin"))))
 				.andExpect(model().attribute("position", hasProperty("area", is("George"))))
-				.andExpect(model().attribute("position", hasProperty("pets", not(empty()))))
-				.andExpect(model().attribute("position", hasProperty("pets", new BaseMatcher<List<Pet>>() {
+				.andExpect(model().attribute("position", hasProperty("companies", not(empty()))))
+				.andExpect(model().attribute("position", hasProperty("companies", new BaseMatcher<List<Company>>() {
 
 					@Override
 					public boolean matches(Object item) {
 						@SuppressWarnings("unchecked")
-						List<Pet> pets = (List<Pet>) item;
-						Pet pet = pets.get(0);
-						if (pet.getVisits().isEmpty()) {
+						List<Company> companies = (List<Company>) item;
+						Company company = companies.get(0);
+						if (company.getVisits().isEmpty()) {
 							return false;
 						}
 						return true;

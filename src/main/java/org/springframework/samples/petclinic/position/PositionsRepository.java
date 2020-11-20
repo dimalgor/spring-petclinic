@@ -16,7 +16,7 @@ public interface PositionsRepository extends Repository<Position, Integer> {
 	 * @return a Collection of matching {@link Position}s (or an empty Collection if none
 	 * found)
 	 */
-	@Query("SELECT DISTINCT position FROM Position position left join fetch position.pets WHERE position.jobPosition LIKE :position%")
+	@Query("SELECT DISTINCT position FROM Position position left join fetch position.companies WHERE position.jobPosition LIKE :position%")
 	@Transactional(readOnly = true)
 	Collection<Position> findByPosition(@Param("position") String position);
 
@@ -25,7 +25,7 @@ public interface PositionsRepository extends Repository<Position, Integer> {
 	 * @param id the id to search for
 	 * @return the {@link Position} if found
 	 */
-	@Query("SELECT position FROM Position position left join fetch position.pets WHERE position.id =:id")
+	@Query("SELECT position FROM Position position left join fetch position.companies WHERE position.id =:id")
 	@Transactional(readOnly = true)
 	Position findById(@Param("id") Integer id);
 

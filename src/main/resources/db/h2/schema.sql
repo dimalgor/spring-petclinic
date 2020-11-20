@@ -2,7 +2,7 @@ DROP TABLE vet_specialties IF EXISTS;
 DROP TABLE vets IF EXISTS;
 DROP TABLE specialties IF EXISTS;
 DROP TABLE visits IF EXISTS;
-DROP TABLE pets IF EXISTS;
+DROP TABLE companies IF EXISTS;
 DROP TABLE types IF EXISTS;
 DROP TABLE positions IF EXISTS;
 
@@ -42,22 +42,22 @@ CREATE TABLE positions (
 );
 CREATE INDEX positions_position ON positions (position);
 
-CREATE TABLE pets (
+CREATE TABLE companies (
   id         INTEGER IDENTITY PRIMARY KEY,
   name       VARCHAR(30),
   birth_date DATE,
   type_id    INTEGER NOT NULL,
   position_id   INTEGER NOT NULL
 );
-ALTER TABLE pets ADD CONSTRAINT fk_pets_positions FOREIGN KEY (position_id) REFERENCES positions (id);
-ALTER TABLE pets ADD CONSTRAINT fk_pets_types FOREIGN KEY (type_id) REFERENCES types (id);
-CREATE INDEX pets_name ON pets (name);
+ALTER TABLE companies ADD CONSTRAINT fk_companies_positions FOREIGN KEY (position_id) REFERENCES positions (id);
+ALTER TABLE companies ADD CONSTRAINT fk_companies_types FOREIGN KEY (type_id) REFERENCES types (id);
+CREATE INDEX companies_name ON companies (name);
 
 CREATE TABLE visits (
   id          INTEGER IDENTITY PRIMARY KEY,
-  pet_id      INTEGER NOT NULL,
+  company_id      INTEGER NOT NULL,
   visit_date  DATE,
   description VARCHAR(255)
 );
-ALTER TABLE visits ADD CONSTRAINT fk_visits_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
-CREATE INDEX visits_pet_id ON visits (pet_id);
+ALTER TABLE visits ADD CONSTRAINT fk_visits_companies FOREIGN KEY (company_id) REFERENCES companies (id);
+CREATE INDEX visits_company_id ON visits (company_id);

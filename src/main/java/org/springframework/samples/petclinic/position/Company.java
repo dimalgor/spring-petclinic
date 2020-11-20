@@ -23,8 +23,8 @@ import org.springframework.samples.petclinic.model.NamedEntity;
 import org.springframework.samples.petclinic.visit.Visit;
 
 @Entity
-@Table(name = "pets")
-public class Pet extends NamedEntity {
+@Table(name = "companies")
+public class Company extends NamedEntity {
 
 	@Column(name = "birth_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -32,7 +32,7 @@ public class Pet extends NamedEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-	private PetType type;
+	private CompanyType type;
 
 	@ManyToOne
 	@JoinColumn(name = "position_id")
@@ -49,11 +49,11 @@ public class Pet extends NamedEntity {
 		return this.birthDate;
 	}
 
-	public PetType getType() {
+	public CompanyType getType() {
 		return this.type;
 	}
 
-	public void setType(PetType type) {
+	public void setType(CompanyType type) {
 		this.type = type;
 	}
 
@@ -84,7 +84,7 @@ public class Pet extends NamedEntity {
 
 	public void addVisit(Visit visit) {
 		getVisitsInternal().add(visit);
-		visit.setPetId(this.getId());
+		visit.setCompanyId(this.getId());
 	}
 
 }

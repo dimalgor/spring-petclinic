@@ -39,7 +39,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(VisitController.class)
 class VisitControllerTests {
 
-	private static final int TEST_PET_ID = 1;
+	private static final int TEST_COMPANY_ID = 1;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -48,31 +48,31 @@ class VisitControllerTests {
 	private VisitRepository visits;
 
 	@MockBean
-	private PetRepository pets;
+	private CompanyRepository companies;
 
 	@BeforeEach
 	void init() {
-		given(this.pets.findById(TEST_PET_ID)).willReturn(new Pet());
+		given(this.companies.findById(TEST_COMPANY_ID)).willReturn(new Company());
 	}
 
 	@Test
 	void testInitNewVisitForm() throws Exception {
-		mockMvc.perform(get("/positions/*/pets/{petId}/visits/new", TEST_PET_ID)).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdateVisitForm"));
+		mockMvc.perform(get("/positions/*/companies/{companyId}/visits/new", TEST_COMPANY_ID)).andExpect(status().isOk())
+				.andExpect(view().name("companies/createOrUpdateVisitForm"));
 	}
 
 	@Test
 	void testProcessNewVisitFormSuccess() throws Exception {
-		mockMvc.perform(post("/positions/*/pets/{petId}/visits/new", TEST_PET_ID).param("name", "George")
+		mockMvc.perform(post("/positions/*/companies/{companyId}/visits/new", TEST_COMPANY_ID).param("name", "George")
 				.param("description", "Visit Description")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/positions/{positionId}"));
 	}
 
 	@Test
 	void testProcessNewVisitFormHasErrors() throws Exception {
-		mockMvc.perform(post("/positions/*/pets/{petId}/visits/new", TEST_PET_ID).param("name", "George"))
+		mockMvc.perform(post("/positions/*/companies/{companyId}/visits/new", TEST_COMPANY_ID).param("name", "George"))
 				.andExpect(model().attributeHasErrors("visit")).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdateVisitForm"));
+				.andExpect(view().name("companies/createOrUpdateVisitForm"));
 	}
 
 }

@@ -33,63 +33,63 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 /**
- * Test class for {@link PetTypeFormatter}
+ * Test class for {@link CompanyTypeFormatter}
  *
  * @author Colin But
  */
 @ExtendWith(MockitoExtension.class)
-class PetTypeFormatterTests {
+class CompanyTypeFormatterTests {
 
 	@Mock
-	private PetRepository pets;
+	private CompanyRepository companies;
 
-	private PetTypeFormatter petTypeFormatter;
+	private CompanyTypeFormatter companyTypeFormatter;
 
 	@BeforeEach
 	void setup() {
-		this.petTypeFormatter = new PetTypeFormatter(pets);
+		this.companyTypeFormatter = new CompanyTypeFormatter(companies);
 	}
 
 	@Test
 	void testPrint() {
-		PetType petType = new PetType();
-		petType.setName("Hamster");
-		String petTypeName = this.petTypeFormatter.print(petType, Locale.ENGLISH);
-		assertThat(petTypeName).isEqualTo("Hamster");
+		CompanyType companyType = new CompanyType();
+		companyType.setName("Hamster");
+		String companyTypeName = this.companyTypeFormatter.print(companyType, Locale.ENGLISH);
+		assertThat(companyTypeName).isEqualTo("Hamster");
 	}
 
 	@Test
 	void shouldParse() throws ParseException {
-		given(this.pets.findPetTypes()).willReturn(makePetTypes());
-		PetType petType = petTypeFormatter.parse("Bird", Locale.ENGLISH);
-		assertThat(petType.getName()).isEqualTo("Bird");
+		given(this.companies.findCompanyTypes()).willReturn(makeCompanyTypes());
+		CompanyType companyType = companyTypeFormatter.parse("Bird", Locale.ENGLISH);
+		assertThat(companyType.getName()).isEqualTo("Bird");
 	}
 
 	@Test
 	void shouldThrowParseException() throws ParseException {
-		given(this.pets.findPetTypes()).willReturn(makePetTypes());
+		given(this.companies.findCompanyTypes()).willReturn(makeCompanyTypes());
 		Assertions.assertThrows(ParseException.class, () -> {
-			petTypeFormatter.parse("Fish", Locale.ENGLISH);
+			companyTypeFormatter.parse("Fish", Locale.ENGLISH);
 		});
 	}
 
 	/**
-	 * Helper method to produce some sample pet types just for test purpose
-	 * @return {@link Collection} of {@link PetType}
+	 * Helper method to produce some sample company types just for test purpose
+	 * @return {@link Collection} of {@link CompanyType}
 	 */
-	private List<PetType> makePetTypes() {
-		List<PetType> petTypes = new ArrayList<>();
-		petTypes.add(new PetType() {
+	private List<CompanyType> makeCompanyTypes() {
+		List<CompanyType> companyTypes = new ArrayList<>();
+		companyTypes.add(new CompanyType() {
 			{
 				setName("Dog");
 			}
 		});
-		petTypes.add(new PetType() {
+		companyTypes.add(new CompanyType() {
 			{
 				setName("Bird");
 			}
 		});
-		return petTypes;
+		return companyTypes;
 	}
 
 }

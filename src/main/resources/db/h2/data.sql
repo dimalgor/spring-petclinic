@@ -30,15 +30,15 @@ INSERT INTO positions VALUES (5, 'Information Technology', 'Mobile Developer', '
 INSERT INTO positions VALUES (6, 'Information Technology', 'Mobile Automation Engineer', '2011-08-06', '2011-08-06');
 INSERT INTO positions VALUES (7, 'Information Technology', 'Java / R&D Engineer', '2011-08-06', '2011-08-06');
 
-INSERT INTO pets VALUES (1, 'Leo', '2010-09-07', 1, 1);
-INSERT INTO pets VALUES (2, 'Basil', '2012-08-06', 6, 2);
-INSERT INTO pets VALUES (3, 'Rosy', '2011-04-17', 2, 3);
-INSERT INTO pets VALUES (4, 'Jewel', '2010-03-07', 2, 3);
-INSERT INTO pets VALUES (5, 'Iggy', '2010-11-30', 3, 4);
-INSERT INTO pets VALUES (6, 'George', '2010-01-20', 4, 5);
-INSERT INTO pets VALUES (7, 'Samantha', '2012-09-04', 1, 6);
-INSERT INTO pets VALUES (8, 'Max', '2012-09-04', 1, 6);
-INSERT INTO pets VALUES (9, 'Lucky', '2011-08-06', 5, 7);
+INSERT INTO companies VALUES (1, 'Leo', '2010-09-07', 1, 1);
+INSERT INTO companies VALUES (2, 'Basil', '2012-08-06', 6, 2);
+INSERT INTO companies VALUES (3, 'Rosy', '2011-04-17', 2, 3);
+INSERT INTO companies VALUES (4, 'Jewel', '2010-03-07', 2, 3);
+INSERT INTO companies VALUES (5, 'Iggy', '2010-11-30', 3, 4);
+INSERT INTO companies VALUES (6, 'George', '2010-01-20', 4, 5);
+INSERT INTO companies VALUES (7, 'Samantha', '2012-09-04', 1, 6);
+INSERT INTO companies VALUES (8, 'Max', '2012-09-04', 1, 6);
+INSERT INTO companies VALUES (9, 'Lucky', '2011-08-06', 5, 7);
 
 INSERT INTO visits VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits VALUES (2, 8, '2013-01-02', 'rabies shot');

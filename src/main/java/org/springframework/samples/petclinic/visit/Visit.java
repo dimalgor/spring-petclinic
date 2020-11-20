@@ -22,8 +22,8 @@ public class Visit extends BaseEntity {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "pet_id")
-	private Integer petId;
+	@Column(name = "company_id")
+	private Integer companyId;
 
 	/**
 	 * Creates a new instance of Visit for the current date
@@ -48,12 +48,12 @@ public class Visit extends BaseEntity {
 		this.description = description;
 	}
 
-	public Integer getPetId() {
-		return this.petId;
+	public Integer getCompanyId() {
+		return this.companyId;
 	}
 
-	public void setPetId(Integer petId) {
-		this.petId = petId;
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
 	}
 
 }

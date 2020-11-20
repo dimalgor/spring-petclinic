@@ -29,25 +29,25 @@
     </table>
   
     <a th:href="@{{id}/edit(id=${position.id})}" class="btn btn-default">Edit Position</a>
-    <a th:href="@{{id}/pets/new(id=${position.id})}" class="btn btn-default">Add New Pet</a>
+    <a th:href="@{{id}/companies/new(id=${position.id})}" class="btn btn-default">Add New Company</a>
   
     <br />
     <br />
     <br />
-    <h2>Pets and Visits</h2>
+    <h2>Companies and Visits</h2>
   
     <table class="table table-striped">
   
-      <tr th:each="pet : ${position.pets}">
+      <tr th:each="company : ${position.companies}">
         <td valign="top">
           <dl class="dl-horizontal">
             <dt>Name</dt>
-            <dd th:text="${pet.name}"></dd>
+            <dd th:text="${company.name}"></dd>
             <dt>Birth Date</dt>
             <dd
-              th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
+              th:text="${#temporals.format(company.birthDate, 'yyyy-MM-dd')}"></dd>
             <dt>Type</dt>
-            <dd th:text="${pet.type}"></dd>
+            <dd th:text="${company.type}"></dd>
           </dl>
         </td>
         <td valign="top">
@@ -58,17 +58,15 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tr th:each="visit : ${pet.visits}">
-              <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
+            <tr th:each="visit : ${company.visits}">
+              <td th:text="${#temporals.format(company.birthDate, 'yyyy-MM-dd')}"></td>
               <td th:text="${visit?.description}"></td>
             </tr>
             <tr>
               <td><a
-                th:href="@{{positionId}/pets/{petId}/edit(positionId=${position.id},petId=${pet.id})}">Edit
-                  Pet</a></td>
+                th:href="@{{positionId}/companies/{companyId}/edit(positionId=${position.id},companyId=${company.id})}">Edit Company</a></td>
               <td><a
-                th:href="@{{positionId}/pets/{petId}/visits/new(positionId=${position.id},petId=${pet.id})}">Add
-                  Visit</a></td>
+                th:href="@{{positionId}/companies/{companyId}/visits/new(positionId=${position.id},companyId=${company.id})}">Add Visit</a></td>
             </tr>
           </table>
         </td>

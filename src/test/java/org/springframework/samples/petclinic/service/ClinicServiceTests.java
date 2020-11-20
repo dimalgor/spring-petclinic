@@ -68,7 +68,7 @@ class ClinicServiceTests {
 	protected PositionsRepository positions;
 
 	@Autowired
-	protected PetRepository pets;
+	protected CompanyRepository companies;
 
 	@Autowired
 	protected VisitRepository visits;
@@ -89,9 +89,9 @@ class ClinicServiceTests {
 	void shouldFindSinglePositionWithPet() {
 		Position position = this.positions.findById(1);
 		assertThat(position.getJobPosition()).endsWith("Engineer");
-		assertThat(position.getPets()).hasSize(1);
-		assertThat(position.getPets().get(0).getType()).isNotNull();
-		assertThat(position.getPets().get(0).getType().getName()).isEqualTo("cat");
+		assertThat(position.getCompanies()).hasSize(1);
+		assertThat(position.getCompanies().get(0).getType()).isNotNull();
+		assertThat(position.getCompanies().get(0).getType().getName()).isEqualTo("cat");
 	}
 
 	@Test
@@ -127,59 +127,59 @@ class ClinicServiceTests {
 
 	@Test
 	void shouldFindPetWithCorrectId() {
-		Pet pet7 = this.pets.findById(7);
+		Company comp7 = this.companies.findById(7);
 
-		System.out.println(pet7.toString());
-		assertThat(pet7.getName()).startsWith("Samantha");
-		assertThat(pet7.getPosition().getArea()).isEqualTo("Information Technology");
+		System.out.println(comp7.toString());
+		assertThat(comp7.getName()).startsWith("Samantha");
+		assertThat(comp7.getPosition().getArea()).isEqualTo("Information Technology");
 
 	}
 
 	@Test
 	void shouldFindAllPetTypes() {
-		Collection<PetType> petTypes = this.pets.findPetTypes();
+		Collection<CompanyType> companyTypes = this.companies.findCompanyTypes();
 
-		PetType petType1 = EntityUtils.getById(petTypes, PetType.class, 1);
-		assertThat(petType1.getName()).isEqualTo("cat");
-		PetType petType4 = EntityUtils.getById(petTypes, PetType.class, 4);
-		assertThat(petType4.getName()).isEqualTo("snake");
+		CompanyType companyType1 = EntityUtils.getById(companyTypes, CompanyType.class, 1);
+		assertThat(companyType1.getName()).isEqualTo("cat");
+		CompanyType companyType4 = EntityUtils.getById(companyTypes, CompanyType.class, 4);
+		assertThat(companyType4.getName()).isEqualTo("snake");
 	}
 
 	@Test
 	@Transactional
 	void shouldInsertPetIntoDatabaseAndGenerateId() {
 		Position position6 = this.positions.findById(6);
-		int found = position6.getPets().size();
+		int found = position6.getCompanies().size();
 
-		Pet pet = new Pet();
-		pet.setName("bowser");
-		Collection<PetType> types = this.pets.findPetTypes();
-		pet.setType(EntityUtils.getById(types, PetType.class, 2));
-		pet.setBirthDate(LocalDate.now());
-		position6.addPet(pet);
-		assertThat(position6.getPets().size()).isEqualTo(found + 1);
+		Company company = new Company();
+		company.setName("bowser");
+		Collection<CompanyType> types = this.companies.findCompanyTypes();
+		company.setType(EntityUtils.getById(types, CompanyType.class, 2));
+		company.setBirthDate(LocalDate.now());
+		position6.addCompany(company);
+		assertThat(position6.getCompanies().size()).isEqualTo(found + 1);
 
-		this.pets.save(pet);
+		this.companies.save(company);
 		this.positions.save(position6);
 
 		position6 = this.positions.findById(6);
-		assertThat(position6.getPets().size()).isEqualTo(found + 1);
+		assertThat(position6.getCompanies().size()).isEqualTo(found + 1);
 		// checks that id has been generated
-		assertThat(pet.getId()).isNotNull();
+		assertThat(company.getId()).isNotNull();
 	}
 
 	@Test
 	@Transactional
 	void shouldUpdatePetName() throws Exception {
-		Pet pet7 = this.pets.findById(7);
-		String oldName = pet7.getName();
+		Company comp7 = this.companies.findById(7);
+		String oldName = comp7.getName();
 
 		String newName = oldName + "X";
-		pet7.setName(newName);
-		this.pets.save(pet7);
+		comp7.setName(newName);
+		this.companies.save(comp7);
 
-		pet7 = this.pets.findById(7);
-		assertThat(pet7.getName()).isEqualTo(newName);
+		comp7 = this.companies.findById(7);
+		assertThat(comp7.getName()).isEqualTo(newName);
 	}
 
 	@Test
@@ -196,26 +196,26 @@ class ClinicServiceTests {
 	@Test
 	@Transactional
 	void shouldAddNewVisitForPet() {
-		Pet pet7 = this.pets.findById(7);
-		int found = pet7.getVisits().size();
+		Company com = this.companies.findById(7);
+		int found = com.getVisits().size();
 		Visit visit = new Visit();
-		pet7.addVisit(visit);
+		com.addVisit(visit);
 		visit.setDescription("test");
 		this.visits.save(visit);
-		this.pets.save(pet7);
+		this.companies.save(com);
 
-		pet7 = this.pets.findById(7);
-		assertThat(pet7.getVisits().size()).isEqualTo(found + 1);
+		com = this.companies.findById(7);
+		assertThat(com.getVisits().size()).isEqualTo(found + 1);
 		assertThat(visit.getId()).isNotNull();
 	}
 
 	@Test
 	void shouldFindVisitsByPetId() throws Exception {
-		Collection<Visit> visits = this.visits.findByPetId(7);
+		Collection<Visit> visits = this.visits.findByCompanyId(7);
 		assertThat(visits).hasSize(2);
 		Visit[] visitArr = visits.toArray(new Visit[visits.size()]);
 		assertThat(visitArr[0].getDate()).isNotNull();
-		assertThat(visitArr[0].getPetId()).isEqualTo(7);
+		assertThat(visitArr[0].getCompanyId()).isEqualTo(7);
 	}
 
 }

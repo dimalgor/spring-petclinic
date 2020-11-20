@@ -12,8 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 
 import org.springframework.beans.support.MutableSortDefinition;
@@ -37,54 +35,54 @@ public class Position extends Job {
 	private LocalDate endDate;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "position")
-	private Set<Pet> pets;
+	private Set<Company> companies;
 
-	protected Set<Pet> getPetsInternal() {
-		if (this.pets == null) {
-			this.pets = new HashSet<>();
+	protected Set<Company> getCompaniesInternal() {
+		if (this.companies == null) {
+			this.companies = new HashSet<>();
 		}
-		return this.pets;
+		return this.companies;
 	}
 
-	protected void setPetsInternal(Set<Pet> pets) {
-		this.pets = pets;
+	protected void setCompaniesInternal(Set<Company> companies) {
+		this.companies = companies;
 	}
 
-	public List<Pet> getPets() {
-		List<Pet> sortedPets = new ArrayList<>(getPetsInternal());
-		PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
-		return Collections.unmodifiableList(sortedPets);
+	public List<Company> getCompanies() {
+		List<Company> sortedCompanies = new ArrayList<>(getCompaniesInternal());
+		PropertyComparator.sort(sortedCompanies, new MutableSortDefinition("name", true, true));
+		return Collections.unmodifiableList(sortedCompanies);
 	}
 
-	public void addPet(Pet pet) {
-		if (pet.isNew()) {
-			getPetsInternal().add(pet);
+	public void addCompany(Company company) {
+		if (company.isNew()) {
+			getCompaniesInternal().add(company);
 		}
-		pet.setPosition(this);
+		company.setPosition(this);
 	}
 
 	/**
-	 * Return the Pet with the given name, or null if none found for this Position.
+	 * Return the Company with the given name, or null if none found for this Position.
 	 * @param name to test
-	 * @return true if pet name is already in use
+	 * @return true if company name is already in use
 	 */
-	public Pet getPet(String name) {
-		return getPet(name, false);
+	public Company getCompany(String name) {
+		return getCompany(name, false);
 	}
 
 	/**
-	 * Return the Pet with the given name, or null if none found for this Position.
+	 * Return the Company with the given name, or null if none found for this Position.
 	 * @param name to test
-	 * @return true if pet name is already in use
+	 * @return true if company name is already in use
 	 */
-	public Pet getPet(String name, boolean ignoreNew) {
+	public Company getCompany(String name, boolean ignoreNew) {
 		name = name.toLowerCase();
-		for (Pet pet : getPetsInternal()) {
-			if (!ignoreNew || !pet.isNew()) {
-				String compName = pet.getName();
+		for (Company company : getCompaniesInternal()) {
+			if (!ignoreNew || !company.isNew()) {
+				String compName = company.getName();
 				compName = compName.toLowerCase();
 				if (compName.equals(name)) {
-					return pet;
+					return company;
 				}
 			}
 		}

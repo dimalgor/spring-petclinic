@@ -13,7 +13,7 @@
             <th style="width: 200px;">Area</th>
             <th style="width: 120px">Start date</th>
             <th style="width: 120px">End date</th>
-            <th>Pets</th>
+            <th>Companies</th>
         </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
               <td th:text="${position.area}"/>
               <td th:text="${position.startDate}"/>
               <td th:text="${position.endDate}"/>
-              <td><span th:each="pet : ${position.pets}" th:text="${pet.name} "/></td>
+              <td><span th:each="company : ${position.companies}" th:text="${company.name} "/></td>
           </tr>
         </tbody>
     </table>

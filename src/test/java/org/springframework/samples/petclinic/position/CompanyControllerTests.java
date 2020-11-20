@@ -34,70 +34,70 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
- * Test class for the {@link PetController}
+ * Test class for the {@link CompanyController}
  *
  * @author Colin But
  */
-@WebMvcTest(value = PetController.class,
-		includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
-class PetControllerTests {
+@WebMvcTest(value = CompanyController.class,
+		includeFilters = @ComponentScan.Filter(value = CompanyTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
+class CompanyControllerTests {
 
 	private static final int TEST_POSITION_ID = 1;
 
-	private static final int TEST_PET_ID = 1;
+	private static final int TEST_COMPANY_ID = 1;
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private PetRepository pets;
+	private CompanyRepository companies;
 
 	@MockBean
 	private PositionsRepository positions;
 
 	@BeforeEach
 	void setup() {
-		PetType cat = new PetType();
+		CompanyType cat = new CompanyType();
 		cat.setId(3);
 		cat.setName("hamster");
-		given(this.pets.findPetTypes()).willReturn(Lists.newArrayList(cat));
+		given(this.companies.findCompanyTypes()).willReturn(Lists.newArrayList(cat));
 		given(this.positions.findById(TEST_POSITION_ID)).willReturn(new Position());
-		given(this.pets.findById(TEST_PET_ID)).willReturn(new Pet());
+		given(this.companies.findById(TEST_COMPANY_ID)).willReturn(new Company());
 
 	}
 
 	@Test
 	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/positions/{positionId}/pets/new", TEST_POSITION_ID)).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdatePetForm")).andExpect(model().attributeExists("pet"));
+		mockMvc.perform(get("/positions/{positionId}/companies/new", TEST_POSITION_ID)).andExpect(status().isOk())
+				.andExpect(view().name("companies/createOrUpdatePetForm")).andExpect(model().attributeExists("company"));
 	}
 
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/positions/{positionId}/pets/new", TEST_POSITION_ID).param("name", "Betty")
+		mockMvc.perform(post("/positions/{positionId}/companies/new", TEST_POSITION_ID).param("name", "Betty")
 				.param("type", "hamster").param("birthDate", "2015-02-12")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/positions/{positionId}"));
 	}
 
 	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/positions/{positionId}/pets/new", TEST_POSITION_ID).param("name", "Betty").param("birthDate",
+		mockMvc.perform(post("/positions/{positionId}/companies/new", TEST_POSITION_ID).param("name", "Betty").param("birthDate",
 				"2015-02-12")).andExpect(model().attributeHasNoErrors("position"))
-				.andExpect(model().attributeHasErrors("pet")).andExpect(model().attributeHasFieldErrors("pet", "type"))
-				.andExpect(model().attributeHasFieldErrorCode("pet", "type", "required")).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdatePetForm"));
+				.andExpect(model().attributeHasErrors("company")).andExpect(model().attributeHasFieldErrors("company", "type"))
+				.andExpect(model().attributeHasFieldErrorCode("company", "type", "required")).andExpect(status().isOk())
+				.andExpect(view().name("companies/createOrUpdatePetForm"));
 	}
 
 	@Test
 	void testInitUpdateForm() throws Exception {
-		mockMvc.perform(get("/positions/{positionId}/pets/{petId}/edit", TEST_POSITION_ID, TEST_PET_ID))
-				.andExpect(status().isOk()).andExpect(model().attributeExists("pet"))
-				.andExpect(view().name("pets/createOrUpdatePetForm"));
+		mockMvc.perform(get("/positions/{positionId}/companies/{petId}/edit", TEST_POSITION_ID, TEST_COMPANY_ID))
+				.andExpect(status().isOk()).andExpect(model().attributeExists("company"))
+				.andExpect(view().name("companies/createOrUpdatePetForm"));
 	}
 
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
-		mockMvc.perform(post("/positions/{positionId}/pets/{petId}/edit", TEST_POSITION_ID, TEST_PET_ID)
+		mockMvc.perform(post("/positions/{positionId}/companies/{companyId}/edit", TEST_POSITION_ID, TEST_COMPANY_ID)
 			.param("name", "Betty")
 			.param("type", "hamster")
 			.param("birthDate", "2015-02-12"))
@@ -107,10 +107,10 @@ class PetControllerTests {
 
 	@Test
 	void testProcessUpdateFormHasErrors() throws Exception {
-		mockMvc.perform(post("/positions/{positionId}/pets/{petId}/edit", TEST_POSITION_ID, TEST_PET_ID).param("name", "Betty")
+		mockMvc.perform(post("/positions/{positionId}/companies/{companyId}/edit", TEST_POSITION_ID, TEST_COMPANY_ID).param("name", "Betty")
 				.param("birthDate", "2015/02/12")).andExpect(model().attributeHasNoErrors("position"))
-				.andExpect(model().attributeHasErrors("pet")).andExpect(status().isOk())
-				.andExpect(view().name("pets/createOrUpdatePetForm"));
+				.andExpect(model().attributeHasErrors("company")).andExpect(status().isOk())
+				.andExpect(view().name("companies/createOrUpdatePetForm"));
 	}
 
 }

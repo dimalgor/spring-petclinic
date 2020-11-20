@@ -20,11 +20,11 @@ class VisitController {
 
 	private final VisitRepository visits;
 
-	private final PetRepository pets;
+	private final CompanyRepository companies;
 
-	public VisitController(VisitRepository visits, PetRepository pets) {
+	public VisitController(VisitRepository visits, CompanyRepository companies) {
 		this.visits = visits;
-		this.pets = pets;
+		this.companies = companies;
 	}
 
 	@InitBinder
@@ -35,31 +35,31 @@ class VisitController {
 	/**
 	 * Called before each and every @RequestMapping annotated method. 2 goals: - Make sure
 	 * we always have fresh data - Since we do not use the session scope, make sure that
-	 * Pet object always has an id (Even though id is not part of the form fields)
-	 * @param petId
-	 * @return Pet
+	 * Company object always has an id (Even though id is not part of the form fields)
+	 * @param companyId
+	 * @return Company
 	 */
 	@ModelAttribute("visit")
-	public Visit loadPetWithVisit(@PathVariable("petId") int petId, Map<String, Object> model) {
-		Pet pet = this.pets.findById(petId);
-		pet.setVisitsInternal(this.visits.findByPetId(petId));
-		model.put("pet", pet);
+	public Visit loadCompanyWithVisit(@PathVariable("companyId") int companyId, Map<String, Object> model) {
+		Company company = this.companies.findById(companyId);
+		company.setVisitsInternal(this.visits.findByCompanyId(companyId));
+		model.put("pet", company);
 		Visit visit = new Visit();
-		pet.addVisit(visit);
+		company.addVisit(visit);
 		return visit;
 	}
 
-	// Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
-	@GetMapping("/positions/*/pets/{petId}/visits/new")
-	public String initNewVisitForm(@PathVariable("petId") int petId, Map<String, Object> model) {
-		return "pets/createOrUpdateVisitForm";
+	// Spring MVC calls method loadCompanyWithVisit(...) before initNewVisitForm is called
+	@GetMapping("/positions/*/companies/{companyId}/visits/new")
+	public String initNewVisitForm(@PathVariable("companyId") int companyId, Map<String, Object> model) {
+		return "companies/createOrUpdateVisitForm";
 	}
 
-	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
-	@PostMapping("/positions/{positionId}/pets/{petId}/visits/new")
+	// Spring MVC calls method loadCompanyWithVisit(...) before processNewVisitForm is called
+	@PostMapping("/positions/{positionId}/companies/{companyId}/visits/new")
 	public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
 		if (result.hasErrors()) {
-			return "pets/createOrUpdateVisitForm";
+			return "companies/createOrUpdateVisitForm";
 		}
 		else {
 			this.visits.save(visit);
